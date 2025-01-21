@@ -12,10 +12,10 @@ export class MenuPage implements OnInit {
 param:any;
   constructor(private router:Router,private activateRoute:ActivatedRoute) {
    this.activateRoute.queryParams.subscribe(_p => {
-      const navParams = this.router.getCurrentNavigation().extras.state;
+      const navParams = this.router.getCurrentNavigation()?.extras?.state;
 
     });
-    this.param = this.router.getCurrentNavigation().extras.state;
+    this.param = this.router.getCurrentNavigation()?.extras?.state;
     console.log(this.param);
  }
 
