@@ -14,9 +14,13 @@ interface PresetValue {
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
 username:any;
 password:any;
 userDetails:PresetValue={};
+get:any;
+post:any;
+
   constructor(private navCtrl:NavController,private http:HttpClient) { }
 
   ngOnInit() {  }
@@ -25,6 +29,7 @@ userDetails:PresetValue={};
 
   this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe((data:any)=>{
     console.log(data);
+    this.get = data;
   });
 
   const httpOptions = {
@@ -44,11 +49,14 @@ userDetails:PresetValue={};
 }
   this.http.post('https://api.restful-api.dev/objects',params,httpOptions).subscribe((data:any)=>{
     console.log(data);
+    this.post = data;
   })
   if (this.username && this.password) {
     console.log('Username:', this.username, 'Password:', this.password);
     this.userDetails['username'] = this.username;
     this.userDetails['password'] = this.password;
+    this.userDetails['get'] = this.get;
+    this.userDetails['post'] = this.post;
     
     // Add login logic here
     this.navCtrl.navigateForward('/menu',{state:this.userDetails})

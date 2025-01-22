@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController, MenuController, ModalController } from '@ionic/angular';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Camera, CameraResultType,CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-menu',
@@ -10,6 +11,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 })
 export class MenuPage implements OnInit {
 param:any;
+myImage:any;
   constructor(private router:Router,private activateRoute:ActivatedRoute) {
    this.activateRoute.queryParams.subscribe(_p => {
       const navParams = this.router.getCurrentNavigation()?.extras?.state;
@@ -20,6 +22,25 @@ param:any;
  }
 
   ngOnInit() {
+  }
+
+
+  async getpic(){
+
+
+      const camera = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera,
+        saveToGallery: true
+      });
+
+      this.myImage = camera.webPath;
+
+      console.log(camera);
+      let data = camera.dataUrl;
+      console.log(data);
   }
 
 }
