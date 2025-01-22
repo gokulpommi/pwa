@@ -16,6 +16,9 @@ param:any;
 myImage:any;
 position: Position | null = null;
   constructor(private router:Router,private activateRoute:ActivatedRoute) {
+
+
+
    this.activateRoute.queryParams.subscribe(_p => {
       const navParams = this.router.getCurrentNavigation()?.extras?.state;
 
@@ -25,6 +28,7 @@ position: Position | null = null;
  }
 
   ngOnInit() {
+ 
   }
 
 

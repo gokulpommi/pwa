@@ -23,11 +23,9 @@ post:any;
 
   constructor(private navCtrl:NavController,private http:HttpClient) { }
 
-  ngOnInit() {  }
+  ngOnInit() { 
 
-  onLogin() {
-
-  this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe((data:any)=>{
+    this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe((data:any)=>{
     console.log(data);
     this.get = data;
   });
@@ -50,7 +48,11 @@ post:any;
   this.http.post('https://api.restful-api.dev/objects',params,httpOptions).subscribe((data:any)=>{
     console.log(data);
     this.post = data;
-  })
+  }) }
+
+  onLogin() {
+
+  
   if (this.username && this.password) {
     console.log('Username:', this.username, 'Password:', this.password);
     this.userDetails['username'] = this.username;
