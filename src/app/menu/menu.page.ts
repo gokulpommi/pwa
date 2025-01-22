@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController, MenuController, ModalController } from '@ionic/angular';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { Camera, CameraResultType,CameraSource } from '@capacitor/camera';
+import { Geolocation, Position } from '@capacitor/geolocation';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +14,7 @@ import { Camera, CameraResultType,CameraSource } from '@capacitor/camera';
 export class MenuPage implements OnInit {
 param:any;
 myImage:any;
+position: Position | null = null;
   constructor(private router:Router,private activateRoute:ActivatedRoute) {
    this.activateRoute.queryParams.subscribe(_p => {
       const navParams = this.router.getCurrentNavigation()?.extras?.state;
@@ -41,6 +44,23 @@ myImage:any;
       console.log(camera);
       let data = camera.dataUrl;
       console.log(data);
+  }
+
+
+   async getCurrentPosition() {
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    this.position = coordinates;
+  }
+
+  async share() {
+    await Share.share({
+      title: 'Come and find me',
+      text: `Here's my current location: 
+        ${this.position?.coords?.latitude}, 
+        ${this.position?.coords?.longitude}`,
+      url: 'http://ionicacademy.com/'
+    });
   }
 
 }
