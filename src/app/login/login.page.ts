@@ -26,6 +26,25 @@ userDetails:PresetValue={};
   this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe((data:any)=>{
     console.log(data);
   });
+
+  const httpOptions = {
+      headers: new HttpHeaders({        
+        'Content-Type': 'application/json'
+      })
+    };
+
+  let params:any ={
+   "name": "Apple MacBook Pro 16",
+   "data": {
+      "year": 2019,
+      "price": 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+   }
+}
+  this.http.post('https://api.restful-api.dev/objects',params,httpOptions).subscribe((data:any)=>{
+    console.log(data);
+  })
   if (this.username && this.password) {
     console.log('Username:', this.username, 'Password:', this.password);
     this.userDetails['username'] = this.username;
