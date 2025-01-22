@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform,ModalController, NavController,AlertController,ToastController,LoadingController} from '@ionic/angular';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+
 
 interface PresetValue {
   [key: string]: any; 
@@ -15,11 +17,15 @@ export class LoginPage implements OnInit {
 username:any;
 password:any;
 userDetails:PresetValue={};
-  constructor(private navCtrl:NavController) { }
+  constructor(private navCtrl:NavController,private http:HttpClient) { }
 
   ngOnInit() {  }
 
   onLogin() {
+
+  this.http.get('https://jsonplaceholder.typicode.com/todos/1').subscribe((data:any)=>{
+    console.log(data);
+  });
   if (this.username && this.password) {
     console.log('Username:', this.username, 'Password:', this.password);
     this.userDetails['username'] = this.username;
